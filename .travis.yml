@@ -21,4 +21,4 @@ script :
 
 # 테스트 성공 후 ...
 after_success:
-  - echo "Test Success!!" 
+  - echo "Test Success!!"
