@@ -1,0 +1,24 @@
+# 관리자 권한갖기
+sudo : required
+
+# node, python 등 선택 가능
+language : generic
+
+# 도커환경에서 앱을 구동하고 있으니, Travis CI도 도커환경에서 구성
+services :
+  - docker
+
+# 테스트(script)를 실행하기 전에 먼저 이미지를 만들어줘야 한다.
+before_install : 
+  - echo "start Creating an image with dockerfile"
+  - docker build -t franc/docker_react_app -f dockerfile.dev .
+
+# 테스트 실행 
+# '-e CI=true'는 Travis CI를 실행하기 위한 설정
+# --coverage는 보다 많은 내용을 출력해주는 설정
+script :
+  - docker run -e CI=true franc/docker_react_app npm run test -- --coverage
+
+# 테스트 성공 후 ...
+after_success:
+  - echo "Test Success!!"
