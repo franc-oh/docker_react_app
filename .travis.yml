@@ -5,12 +5,12 @@ language: generic
 services:
   - docker
 
-before_install: 
-  - echo "start Creating an image with dockerfile"
-  - docker build -t franc/docker_react_app -f dockerfile.dev .
+before_install:
+  - echo "start creating an image with dockerfile"
+  - docker build -t smileajw1004/docker-react-app -f Dockerfile.dev .
 
-script:
-  - docker run -e CI=true franc/docker_react_app npm run test -- --coverage
+script: 
+  - docker run -e CI=true smileajw1004/docker-react-app npm run test -- --coverage
 
 after_success:
   - echo "Test Success!!"
